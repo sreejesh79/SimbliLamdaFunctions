@@ -9,7 +9,7 @@ const serverlessConfiguration: AWS = {
   app: 'simblifylamda',
   service: 'simblifylamdaservice',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild', 'serverless-offline'],
+  plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dotenv-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',

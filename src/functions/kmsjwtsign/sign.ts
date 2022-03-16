@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk';
 import base64url from "base64url";
 const kms = new AWS.KMS();
 
-const keyId = '06e3c165-3068-4e16-9693-2aae36fa61a3'
+const keyId = process.env.KMS_KEY_ID;
 
 const headers = {
     "alg": "RS256",
@@ -11,11 +11,11 @@ const headers = {
 
 export const sign = async (payload) => {
     payload.iat = Math.floor(Date.now() / 1000);
-
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    payload.exp = Math.floor(tomorrow.getTime() / 1000);
-
+    // payload.exp = Math.floor(tomorrow.getTime() / 1000);
+    const expiry = new Date(Date.now() + 60*5000);
+    payload.exp = Math.floor(expiry.getTime() / 1000);
     let token_components: any = {
         header: base64url(JSON.stringify(headers)),
         payload: base64url(JSON.stringify(payload)),
