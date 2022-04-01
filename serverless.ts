@@ -2,6 +2,9 @@ import type { AWS } from '@serverless/typescript';
 
 import sign from '@functions/kmsjwtsign';
 import verify from '@functions/kmsjwtverify';
+import upload from '@functions/signedurlupload';
+import download from '@functions/signedurldownload';
+
 
 
 const serverlessConfiguration: AWS = {
@@ -14,6 +17,20 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs14.x',
     region: 'ap-south-1',
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: [
+          's3:PutObject',
+          's3:PutObjectAcl',
+          's3:GetObject',
+          's3:GetObjectAcl'
+        ],
+        Resource: {
+          "Fn::Join": ['arn:aws:s3:::dev-simblistorage', '*']
+        }
+      }
+    ],
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -24,7 +41,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { sign, verify },
+  functions: { sign, verify, upload, download },
   package: { 
     individually: true,
     include: ['public.pem']
