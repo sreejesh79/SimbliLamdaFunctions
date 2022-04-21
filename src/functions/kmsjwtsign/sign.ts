@@ -1,11 +1,12 @@
 import * as AWS from 'aws-sdk';
 import base64url from "base64url";
 const kms = new AWS.KMS();
+var format = require('ecdsa-sig-formatter');
 
 const keyId = process.env.KMS_KEY_ID;
 
 const headers = {
-    "alg": "RS256",
+    "alg": "ES256",
     "typ": "JWT"
   }
 
@@ -26,14 +27,12 @@ export const sign = async (payload) => {
     let res = await kms.sign({
         Message: message,
         KeyId: keyId,
-        SigningAlgorithm: 'RSASSA_PKCS1_V1_5_SHA_256',
+        SigningAlgorithm: 'ECDSA_SHA_256',
         MessageType: 'RAW'
     }).promise()
-
     token_components.signature = res.Signature.toString("base64")
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=/g, '');
-
-    return token_components.header + "." + token_components.payload + "." + token_components.signature;
+    return token_components.header + "." + token_components.payload + "." + format.derToJose(res.Signature, 'ES256');
 }

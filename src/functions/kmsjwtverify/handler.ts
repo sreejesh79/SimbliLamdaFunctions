@@ -6,7 +6,7 @@ import { verify } from './verify';
 
 const handler: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
       
-    const publicKey = './public.pem';
+    const publicKey = './Publickey-98b24899-c41f-4a27-9bbc-962ad513e50e.pem';
     const decoded: any =  await verify(event.headers.token, publicKey);
     console.log('decoded',decoded);
     return formatJSONResponse({
