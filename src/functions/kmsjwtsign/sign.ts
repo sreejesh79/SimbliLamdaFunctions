@@ -3,14 +3,17 @@ import base64url from "base64url";
 const kms = new AWS.KMS();
 var format = require('ecdsa-sig-formatter');
 
-const keyId = process.env.KMS_KEY_ID;
+//const keyId = process.env.KMS_KEY_ID;
 
 const headers = {
     "alg": "ES256",
     "typ": "JWT"
   }
 
-export const sign = async (payload) => {
+export const sign = async (event) => {
+    const payload = event.body;
+    const eventHeaders = event.headers;
+    const keyId = eventHeaders['x-key-id'];
     payload.iat = Math.floor(Date.now() / 1000);
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)

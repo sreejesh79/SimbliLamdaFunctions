@@ -44,7 +44,7 @@ const serverlessConfiguration: AWS = {
   functions: { sign, verify, upload, download },
   package: { 
     individually: true,
-    include: ['public.pem']
+    include: ['.keys/**']
   },
   custom: {
     esbuild: {
