@@ -13,7 +13,7 @@ const headers = {
 export const sign = async (event) => {
     const payload = event.body;
     const eventHeaders = event.headers;
-    const keyId = eventHeaders['x-key-id'];
+    const keyId = eventHeaders['keyId'];
     payload.iat = Math.floor(Date.now() / 1000);
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)

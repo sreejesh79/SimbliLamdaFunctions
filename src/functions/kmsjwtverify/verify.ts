@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 export const verify = async (event) => {
     const token = event.headers['token'];
-    const keyId = event.headers['x-key-id'];
+    const keyId = event.headers['keyId'];
     const publicKey = `./.keys/Publickey-${keyId}.pem`;
     let cert =  fs.readFileSync(publicKey);
     try {
