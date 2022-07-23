@@ -1,5 +1,5 @@
 # SimbliLamdaFunctions
-JWT KMS Sign &amp; Verify for user authentication, Download and uploads using s3 signed url.
+JWT KMS Sign &amp; Verify for user authentication, Download and uploads using s3 signed url using the serverless framework.
 ## Intallation
 npm install serverless -g<br/>
 yarn
