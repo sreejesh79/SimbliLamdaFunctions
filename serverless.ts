@@ -21,6 +21,11 @@ const serverlessConfiguration: AWS = {
       {
         Effect: 'Allow',
         Action: [
+          "kms:Decrypt",
+          "kms:Encrypt",
+          "kms:Sign",
+          "kms:Verify",
+          "kms:CreateGrant",
           's3:PutObject',
           's3:PutObjectAcl',
           's3:GetObject',
