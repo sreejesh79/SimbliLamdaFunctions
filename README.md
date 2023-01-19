@@ -7,3 +7,6 @@ yarn
 serverless invoke local --function functionName (function names can be found in serverless.ts)
 ## To Deploy
 serverless deploy  --org=simbliserverless
+
+## To Deploy a function
+serverless deploy  --org=simbliserverless -f functionName

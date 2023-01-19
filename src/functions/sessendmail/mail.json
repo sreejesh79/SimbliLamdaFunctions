@@ -1,0 +1,21 @@
+{
+    "Source": "sreejesh@kriyatma.com",
+    "Destination": {
+      "ToAddresses": [
+        "sreejesh@kriyatma.com"
+      ]
+    },
+    "ReplyToAddresses": [],
+    "Message": {
+      "Body": {
+        "Html": {
+          "Charset": "UTF-8",
+          "Data": "This is the body of my email!"
+        }
+      },
+      "Subject": {
+        "Charset": "UTF-8",
+        "Data": "Test Mail!"
+      }
+    }
+  }

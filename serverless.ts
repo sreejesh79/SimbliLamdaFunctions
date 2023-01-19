@@ -4,7 +4,7 @@ import sign from '@functions/kmsjwtsign';
 import verify from '@functions/kmsjwtverify';
 import upload from '@functions/signedurlupload';
 import download from '@functions/signedurldownload';
-
+import mail from '@functions/sessendmail';
 
 
 const serverlessConfiguration: AWS = {
@@ -29,7 +29,9 @@ const serverlessConfiguration: AWS = {
           's3:PutObject',
           's3:PutObjectAcl',
           's3:GetObject',
-          's3:GetObjectAcl'
+          's3:GetObjectAcl',
+          "ses:SendEmail",
+          "ses:SendRawEmail"
         ],
         Resource: {
           "Fn::Join": ['arn:aws:s3:::dev-simblistorage', '*']
@@ -46,7 +48,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { sign, verify, upload, download },
+  functions: { sign, verify, upload, download, mail },
   package: { 
     individually: true,
     include: ['.keys/**']
