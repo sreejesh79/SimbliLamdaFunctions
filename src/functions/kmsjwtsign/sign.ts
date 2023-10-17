@@ -18,8 +18,8 @@ export const sign = async (event) => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
     // payload.exp = Math.floor(tomorrow.getTime() / 1000);
-    const expiry = new Date(Date.now() + 60*5000);
-    payload.exp = Math.floor(expiry.getTime() / 1000);
+    // const expiry = new Date(Date.now() + 60*5000);
+    // payload.exp = Math.floor(expiry.getTime() / 1000);
     let token_components: any = {
         header: base64url(JSON.stringify(headers)),
         payload: base64url(JSON.stringify(payload)),

@@ -3,9 +3,10 @@ const ses = new AWS.SES();
 
 export const sendmail = async (payload) => {
     try {
-        // console.log(payload.params);
+       // console.log(payload.params);
         const parsedParams: any = JSON.parse(payload.params);
         const emailResponse: any = await ses.sendEmail(parsedParams).promise();
+       // console.log(emailResponse);
         if (emailResponse && emailResponse.MessageId) {
             return {
                 "error" : false,
@@ -25,7 +26,7 @@ export const sendmail = async (payload) => {
         return {
             "error" : true,
             "status": 501,
-            "message": e.message
+            "data": e.message
         }
     }
 }
